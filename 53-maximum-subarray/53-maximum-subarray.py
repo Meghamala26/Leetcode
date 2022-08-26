@@ -4,7 +4,7 @@ class Solution:
         maxSum=float('-inf')
         cur=0
         
-        for i,x in enumerate(nums):
+        for x in nums:
             cur=max(cur+x,x)
             maxSum=max(maxSum, cur)
             
