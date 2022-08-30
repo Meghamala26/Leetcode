@@ -1,14 +1,28 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
         
-        curMin=nums[0]
+        if len(nums)==1:
+            return nums[0]
         
-        for i in range(1,len(nums)):
-            if nums[i]>nums[i-1]:
-                continue
-            else:
-                curMin=min(curMin,nums[i])
-                
-        return curMin
+        left=0
+        right=len(nums)-1
+        
+        if nums[left]<nums[right]:
+            return nums[0]
+        
+        while (left < right) :
+            mid=(left+ right)//2 
             
+            if nums[mid]<nums[mid-1]:
+                return nums[mid]
+            if nums[mid+1]<nums[mid]:
+                return nums[mid+1]
+            
+            if nums[mid]>nums[left]:
+                left =mid+1
+            else:
+                right=mid
+                
+                
+        
         
