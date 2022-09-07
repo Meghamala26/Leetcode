@@ -5,19 +5,17 @@ class Solution:
             return len(s)
         
         
-        freq_map={}
+        index_map={}
         
         left=right=0
         maxLen=float('-inf')
         
         for right,x in enumerate(s):
-            if x not in freq_map:
-                freq_map[x]=1
+            if x not in index_map:
+                index_map[x]=right
             else:
-                while(freq_map[x]==1):
-                    freq_map[s[left]]-=1
-                    left+=1
-                freq_map[x]=1
+                left = max(left, index_map[x]+1)
+                index_map[x]=right
                 
             maxLen=max(maxLen, right-left+1)
     
