@@ -1,32 +1,17 @@
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
-        N=len(nums)
         
+        
+        nums= set(nums)
+        for i in range(1,max(nums)+1):
+            if i in nums:
+                continue
+            else:
+                return i
         if 1 not in nums:
             return 1
-        
-        for i in range(N):
-            if nums[i]<=0 or nums[i]>N:
-                nums[i]=1
-        
-        for i in range(N):
-            x=abs(nums[i])
-            if x == N:
-                nums[0]= -abs(nums[0])
-                   
-            else:
-                nums[x]= -abs(nums[x])
-                
-        print(nums)
-                
-        for i in range(1,N):
-            if nums[i]>0:
-                return i
-        
-        if nums[0]>0:
-            return N
-        
-        return N+1
+        else:
+            return max(nums)+1
             
         
                 
