@@ -1,23 +1,23 @@
-class Solution:
-    def maxProduct(self, nums: List[int]) -> int:
-        
+class Solution(object):
+    def maxProduct(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
         maxProd=nums[0]
         minProd=nums[0]
-        result=maxProd
+        res=nums[0]
         
-        
-        
-        for i,x in enumerate(nums):
-            if i==0:
-                continue
-            temp_max=max(x,maxProd*x,minProd*x)
-            minProd=min(x,maxProd*x,minProd*x)
+        for x in nums[1:]:
             
-            maxProd=temp_max
+            print(maxProd)
+            print(minProd)
             
-            result=max(maxProd,result)
-                
-        return result
-        
-        
-        
+            temp=max(x,minProd*x,maxProd*x)
+            minProd=min(x, minProd*x, maxProd*x)
+            maxProd=temp
+            
+            res=max(res,maxProd)
+            
+            
+        return res
