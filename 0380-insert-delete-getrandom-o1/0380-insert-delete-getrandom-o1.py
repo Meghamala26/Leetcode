@@ -1,27 +1,38 @@
-import random
+from random import choice
 class RandomizedSet:
 
     def __init__(self):
-        self.setMap=set()
+        self.setMap={}
+        self.setList=[]
+        
         
 
     def insert(self, val: int) -> bool:
         if val not in self.setMap:
-            self.setMap.add(val)
+            self.setMap[val]=len(self.setList)
+            self.setList.append(val)
             return True
+        
         return False
         
 
     def remove(self, val: int) -> bool:
         if val in self.setMap:
-            self.setMap.remove(val)
+            i=self.setMap[val]
+            self.setMap[self.setList[-1]]=i
+            self.setList[i], self.setList[-1]= self.setList[-1], self.setList[i]
+            
+            self.setList.pop()
+            self.setMap.pop(val) 
             return True
+        
         return False
         
 
     def getRandom(self) -> int:
-        num  =  random.sample(self.setMap, 1)
-        return num[0]
+        return random.choice(self.setList)
+        
+        
 
 
 # Your RandomizedSet object will be instantiated and called as such:
