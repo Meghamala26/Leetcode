@@ -20,9 +20,10 @@ class Solution:
                 lastchild=curr.child
                 nextCurr=None
                 while lastchild.next:
-                    lastchild=lastchild.next
+                    
                     if lastchild.child and not nextCurr:
                         nextCurr=lastchild
+                    lastchild=lastchild.next
                 curr.next=curr.child
                 curr.child.prev=curr
                 lastchild.next=temp
@@ -32,7 +33,7 @@ class Solution:
                 if nextCurr:
                     curr=nextCurr
                 else:    
-                    curr=curr.next
+                    curr=lastchild
             else:
                 curr=curr.next
                     
