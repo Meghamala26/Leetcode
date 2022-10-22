@@ -1,34 +1,18 @@
 class Solution:
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
-        
-        
         paths=[]
         target=len(graph)-1
         
-        def getPaths(node, curPath, target):
-            
-            curPath+=',' + str(node)
+        def getPaths(node, curPath):
             if node==target:
-                paths.append(curPath.split(','))
+                paths.append(list(curPath))
                 return
-            
-            
             for x in graph[node]:
-
-                getPaths(x, curPath, target)
-                
-                
+                curPath.append(x)
+                getPaths(x, curPath)
+                curPath.pop()  
             return
-                
-            
-            
-            
-            
-            
-        
-        
-        for y in graph[0]:
-            getPaths(y, "0", target)
-            
+
+        getPaths(0, [0])   
         return paths
             
