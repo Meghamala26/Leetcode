@@ -36,13 +36,14 @@ class Solution:
         q = [startUrl]
         visited.add(startUrl)
         res = []
+        hostname=getHostName(startUrl)
         
         while q:
             url = q.pop(0)
             res.append(url)
             
             for n in htmlParser.getUrls(url):
-                if getHostName(n) == getHostName(url) and n not in visited:
+                if getHostName(n) == hostname and n not in visited:
                     q.append(n)
                     visited.add(n)
         return res
