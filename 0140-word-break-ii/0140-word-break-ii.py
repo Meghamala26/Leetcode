@@ -1,18 +1,27 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
         
-        res=[]
         
-        def create(s,curStnc):
+        memo=collections.defaultdict(list)
+        
+        def create(s):
+            
             if len(s)==0:
-                res.append(curStnc.strip())
-                return 
-            word=''
+                return [" "]
+            if s in memo:
+                return memo[s]
+            word=""
             for i in range(len(s)):
                 word+=s[i]
                 if word in wordDict:
-                    create(s[i+1:], curStnc+word+" ")
-            return
+                    print(s)
+                    stncList=create(s[i+1:])
+                    for x in stncList:
+                        memo[s].append((word+" "+ x).strip())
+                    
+                        
+            
+            return memo[s]
             
                 
                 
@@ -20,5 +29,6 @@ class Solution:
         
         
         
-        create(s,"")
-        return res
+        create(s)
+        print(memo)
+        return memo[s]
