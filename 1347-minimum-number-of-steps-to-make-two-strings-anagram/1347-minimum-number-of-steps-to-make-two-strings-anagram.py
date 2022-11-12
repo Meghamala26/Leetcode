@@ -1,18 +1,17 @@
 class Solution:
     def minSteps(self, s: str, t: str) -> int:
         
-        sCount=Counter(s)
-        tCount=Counter(t)
+        sCount=Counter(s) # O(n)
+        tCount=Counter(t) # O(n)
         res=0
         
-        for ch,freq in tCount.items():
+        for ch,freq in tCount.items(): # O(m)
             if ch in sCount:
-                if sCount[ch]==freq:
+                if sCount[ch]>=freq:
                     continue
-                elif sCount[ch]<freq:
-                    res+=abs(sCount[ch]-freq)
                 else:
-                    continue
+                    res+=abs(sCount[ch]-freq)
+                
             else:
                 res+=freq
                 
