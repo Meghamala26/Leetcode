@@ -1,29 +1,31 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
+        rows,cols=len(board),len(board[0])
         
-        rows,cols=len(board), len(board[0])
-        path=set()
-        
-        
-        def search(i,j,index):
-            if index==len(word):
-                return True
-            if i<0 or j<0 or i>=rows or j>=cols or (i,j) in path or board[i][j]!=word[index]:
+        def checkWord(row,col,index,visited):
+            #print(index, visited)
+            if row<0 or row>=rows or col<0 or col>=cols or (row,col) in visited or board[row][col]!=word[index]:
                 return False
             
-            path.add((i,j))
+            if index==len(word)-1:
+                return True
             
-            for rowoffset,coloffset in [(0,1),(0,-1),(1,0),(-1,0)]:
-                if search(i+rowoffset,j+coloffset,index+1):
-                    return True
+            visited.add((row,col))
             
-            path.remove((i,j))
-            return False
+            
+            ret=checkWord(row+1,col,index+1,visited) or checkWord(row-1,col,index+1,visited) or checkWord(row,col+1,index+1,visited) or checkWord(row,col-1,index+1,visited)
+            
+            visited.remove((row,col))
+            return ret
+        
+            
         
         
-        for row in range(rows):
-            for col in range(cols):
-                if search(row,col,0):
-                    return True
+        
+        for i in range(rows):
+            for j in range(cols):
+                if board[i][j]==word[0]:
+                    if checkWord(i,j,0,set()):
+                        return True
         return False
-            
+        
