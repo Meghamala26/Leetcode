@@ -1,24 +1,28 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         
-        if len(s)==0:
-            return 0
-        
-        curMap={} # char in cur String: index
-        start=0
+       
+        start,end=0,0
+        curSet=set()
         maxLen=float('-inf')
-        end=0
-        
         while(end<len(s)):
-            if s[end] not in curMap:
-                curMap[s[end]]=end
+            
+            if s[end] not in curSet:
+                curSet.add(s[end])
             else:
-                maxLen=max(maxLen, end-start)
-                #remove all chars from curMap between cur start and repeated char
-                for i in range(start,curMap[s[end]]):
-                    del curMap[s[i]]
-                start=curMap[s[end]]+1
-                curMap[s[end]]=end
+                #print(s[start:end])
+                while(curSet and s[end] in curSet):
+                    #print(start)
+                    curSet.remove(s[start])
+                    start+=1
+                curSet.add(s[end])
+            maxLen=max(maxLen,end-start+1)
             end+=1
+                
+        return maxLen if maxLen!=float('-inf') else 0
+                
+                    
+                
+            
+            
         
-        return max(maxLen, end-start)
