@@ -1,16 +1,14 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        #sort by start time
-        intervals.sort(key = lambda x:x[0]) #nlogn
-        res=[intervals[0]]
+        intervals.sort(key=lambda x:x[0])
+        print(intervals)
+        output=[]
         
-        for time in intervals[1:]: #n-1
-            if time[0]<=res[-1][1]:
-                res[-1][1]=max(res[-1][1],time[1])
+        for interval in intervals:
+            if output and output[-1][0]<=interval[0]<=output[-1][1]:
+                output[-1][0]=min(output[-1][0],interval[0])
+                output[-1][1]=max(output[-1][1],interval[1])
             else:
-                res.append(time)
+                output.append(interval)
+        return output
                 
-        return res
-        
-        
-        
