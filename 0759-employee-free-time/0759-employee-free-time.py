@@ -9,7 +9,7 @@ class Interval:
 class Solution:
     def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':
         result = []
-        intervals=[y for x in schedule for y in x]
+        intervals=[interval for employee in schedule for interval in employee]
         intervals.sort(key=lambda x:x.start)
 
         maxEnd=intervals[0].end
