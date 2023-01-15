@@ -1,33 +1,13 @@
-class Solution(object):
-    def minMeetingRooms(self, intervals):
-        """
-        :type intervals: List[List[int]]
-        :rtype: int
-        """
-        
-        intervals=sorted(intervals, key=lambda x:x[0])
-        #print(intervals)
-        rooms=[]
-        heapq.heappush(rooms, intervals[0][1])
-        for x in intervals[1:]:
-            start=x[0]
-            end=x[1]
-           
-            if rooms[0]<=start:
-                heapq.heappop(rooms)
-                
-            heapq.heappush(rooms, end)
-                
-                
+class Solution:
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        minHeap=[]
+        intervals.sort(key=lambda x:x[0])
+        heapq.heappush(minHeap,intervals[0][1])
 
-                    
+        for i in range(1,len(intervals)):
+            if minHeap[0]<=intervals[i][0]:
+                heapq.heappop(minHeap)
+            heapq.heappush(minHeap,intervals[i][1])
             
-                
-        return len(rooms)
-                    
-                
-            
-            
-        
-        
-        
+
+        return len(minHeap)
