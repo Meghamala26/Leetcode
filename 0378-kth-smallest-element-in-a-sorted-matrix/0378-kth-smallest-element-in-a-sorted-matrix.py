@@ -1,23 +1,17 @@
 class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        heap=[]
-        heapq.heapify(heap)
         
-        n=len(matrix)
-            
-        for i in range(n):
-            for j in range(n):
-                if len(heap)<k:
-                    
-                    heapq.heappush(heap,-matrix[i][j])
-                    
+        sortedMatrix=[]
+        heapq.heapify(sortedMatrix)
+        
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if len(sortedMatrix)<k:
+                    heapq.heappush(sortedMatrix, -matrix[i][j])
                 else:
-                    if matrix[i][j]<-heap[0]:
+                    if -sortedMatrix[0]>matrix[i][j]:
+                        heapq.heappop(sortedMatrix)
+                        heapq.heappush(sortedMatrix, -matrix[i][j])
                         
-                        heapq.heappop(heap)
-                        print(-matrix[i][j])
-                        
-                        heapq.heappush(heap,-matrix[i][j])
-                    else:
-                        continue
-        return -heap[0]
+        return -sortedMatrix[0]
+        
