@@ -5,8 +5,11 @@ class Solution:
         minCost=prices[0]
         
         for i in range(1,len(prices)):
-            minCost=min(minCost,prices[i])
             maxP=max(maxP,prices[i]-minCost)
+            minCost=min(minCost, prices[i])
+        
         return maxP
             
+        
+        
         
